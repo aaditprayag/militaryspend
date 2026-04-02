@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Defense Spend Atlas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header>
+        <div>
+          <p class="eyebrow">US Federal Contract Intelligence</p>
+          <h1>Defense Spend Atlas</h1>
+          <p class="subtitle">
+            Track military contractor spending from USAspending.gov and project future contract revenue.
+          </p>
+        </div>
+      </header>
+
+      <section class="controls card">
+        <div class="grid">
+          <label>
+            Company (recipient)
+            <input id="recipientInput" type="text" placeholder="e.g., Lockheed Martin" />
+          </label>
+          <label>
+            Start fiscal year
+            <input id="startYearInput" type="number" min="2008" max="2100" />
+          </label>
+          <label>
+            End fiscal year
+            <input id="endYearInput" type="number" min="2008" max="2100" />
+          </label>
+          <button id="loadBtn">Load data</button>
+        </div>
+        <p class="muted">
+          Data source: <a href="https://api.usaspending.gov/" target="_blank" rel="noreferrer">USAspending API</a>
+        </p>
+      </section>
+
+      <section class="stats-grid">
+        <article class="card stat">
+          <h2>Total obligations</h2>
+          <p id="totalObligation">$0</p>
+        </article>
+        <article class="card stat">
+          <h2>Avg annual obligations</h2>
+          <p id="avgAnnual">$0</p>
+        </article>
+        <article class="card stat">
+          <h2>Forecast next FY</h2>
+          <p id="nextYearForecast">$0</p>
+        </article>
+      </section>
+
+      <section class="card">
+        <div class="section-head">
+          <h2>Top recipient locations</h2>
+          <span id="mapLegend">Marker size = obligation volume</span>
+        </div>
+        <div id="map"></div>
+      </section>
+
+      <section class="card">
+        <div class="section-head">
+          <h2>Annual obligations & forecast</h2>
+          <span id="forecastNote"></span>
+        </div>
+        <canvas id="trendCanvas" width="900" height="320" aria-label="obligation trend"></canvas>
+      </section>
+
+      <section class="card">
+        <h2>Contracting highlights</h2>
+        <ul id="highlights"></ul>
+      </section>
+    </div>
+
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
+    <script src="app.js"></script>
+  </body>
+</html>
