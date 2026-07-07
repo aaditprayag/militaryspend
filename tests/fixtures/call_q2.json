@@ -1,0 +1,21 @@
+{
+  "event": {"source_event_id": "evt_q2", "call_date": "2025-04-30", "fiscal_label": "Q2 FY2025"},
+  "components": [
+    {"person_name": "Operator", "component_type": "Presentation Operator Message",
+     "text": "Ladies and gentlemen, welcome to the second quarter earnings call. Please stand by."},
+    {"person_name": "Pat Chief", "component_type": "Presenter Speech",
+     "text": "Thank you and good afternoon everyone. Revenue was 10.7 billion dollars, up 11% year over year. Demand for our AI server accelerator products remains strong across every hyperscaler customer. We are announcing our new Falcon inference accelerator for sovereign cloud deployments today."},
+    {"person_name": "Fran Finance", "component_type": "Presenter Speech",
+     "text": "Gross margin was 55.1%, a decline of 140 bps sequentially on mix. There is greater uncertainty in the handset channel and we may see pushouts of some orders. We are guiding next quarter revenue to 10.5 billion dollars at the midpoint."},
+    {"person_name": "Operator", "component_type": "Question and Answer Operator Message",
+     "text": "We will now begin the question and answer session. Our first question comes from Alex Analyst of Big Bank."},
+    {"person_name": "Alex Analyst", "component_type": "Question",
+     "text": "Thanks for taking my question about the data center business. Can you quantify the AI server backlog exiting the quarter and how visibility compares to ninety days ago?"},
+    {"person_name": "Pat Chief", "component_type": "Answer",
+     "text": "Backlog grew again this quarter and visibility now extends beyond four quarters. The Falcon accelerator pipeline added several sovereign cloud design wins this quarter."},
+    {"person_name": "Bella Broker", "component_type": "Question",
+     "text": "Could you walk through the export control exposure for the China data center pipeline and any tariff headwind embedded in guidance?"},
+    {"person_name": "Fran Finance", "component_type": "Answer",
+     "text": "China remains a modest part of our data center pipeline today. We could see some tariff headwind but it is not material to guidance at this point."}
+  ]
+}

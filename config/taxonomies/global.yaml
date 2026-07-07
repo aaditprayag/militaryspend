@@ -1,0 +1,7 @@
+ai_datacenter: [AI server, data center, datacenter, accelerator, GPU, inference, training, hyperscaler]
+capacity_capex: [capacity, capex, capital expenditure, utilization, expansion, fab]
+inventory: [inventory, channel, correction, destocking, restocking, days of inventory]
+pricing: [ASP, pricing, price increase, price decline, mix]
+demand_language: [demand, orders, backlog, bookings, visibility, design win]
+guidance_risk: [headwind, uncertainty, macro, softness, pushout, delay]
+china_geo: [China, export control, tariff, geopolitical]

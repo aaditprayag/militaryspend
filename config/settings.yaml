@@ -1,0 +1,17 @@
+alignment_threshold: 0.75      # cosine; below = new/dropped
+zscore_window_quarters: 8
+zscore_min_quarters: 4
+top_k_delta_sentences: 25      # per bucket fed to LLM
+llm_model: claude-sonnet-4-6
+llm_max_tokens: 4000
+embedding_model: all-mpnet-base-v2
+# Loughran-McDonald Master Dictionary. sraf.nd.edu hosts the CSV behind a
+# Google Drive link that changes between releases, so no stable direct URL is
+# hardcoded. Either paste the current direct-download URL here, or manually
+# download the Master Dictionary CSV from
+# https://sraf.nd.edu/loughranmcdonald-master-dictionary/ into data/lexicons/.
+lm_dictionary_url: ""
+db_path: data/db.sqlite
+raw_dir: data/raw
+lexicon_dir: data/lexicons
+reports_dir: data/reports

@@ -1,0 +1,49 @@
+[project]
+name = "tde"
+version = "0.1.0"
+description = "Transcript Delta Engine: QoQ language-change analytics on earnings call transcripts"
+requires-python = ">=3.11"
+dependencies = [
+    "typer>=0.12",
+    "rich>=13.0",
+    "pyyaml>=6.0",
+    "python-dotenv>=1.0",
+    "numpy>=1.26",
+    "pysbd>=0.3.4",
+    "jinja2>=3.1",
+    "requests>=2.31",
+    "kensho-kfinance>=3.0",
+    "anthropic>=0.40",
+]
+
+[project.optional-dependencies]
+# Heavy model dependencies -- required for `tde analyze` (embeddings + finbert),
+# but not for ingestion, unit tests, or report rendering.
+ml = [
+    "sentence-transformers>=3.0",
+    "transformers>=4.40",
+    "torch>=2.2",
+]
+# PDF extraction for the Japan IR adapters (Phase 4).
+pdf = ["pdfplumber>=0.11"]
+dev = ["pytest>=8.0", "ruff>=0.6"]
+
+[project.scripts]
+tde = "tde.cli:app"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["tde"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W", "UP"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

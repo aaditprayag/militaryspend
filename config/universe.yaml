@@ -1,0 +1,12 @@
+companies:
+  - {ticker: QCOM,  name: Qualcomm,            source: kfinance}
+  - {ticker: NVDA,  name: NVIDIA,              source: kfinance}
+  - {ticker: AVGO,  name: Broadcom,            source: kfinance}
+  - {ticker: MRVL,  name: Marvell,             source: kfinance}
+  - {ticker: ARM,   name: Arm Holdings,        source: kfinance}
+  - {ticker: TSM,   name: TSMC,                source: kfinance}
+  - {ticker: CRWV,  name: CoreWeave,           source: kfinance}
+  - {ticker: NBIS,  name: Nebius,              source: kfinance}
+  - {ticker: "6981", name: Murata,             source: ir_murata,  exchange: TSE}
+  - {ticker: "6976", name: Taiyo Yuden,        source: ir_taiyo,   exchange: TSE}
+  - {ticker: "6762", name: TDK,                source: kfinance,   exchange: TSE}  # try kfinance first; fall back to IR scraper if uncovered
