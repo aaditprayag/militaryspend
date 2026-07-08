@@ -1,0 +1,100 @@
+<meta charset="utf-8">
+<title>{{ company.name }} — {{ transcript.fiscal_label or transcript.call_date }}</title>
+<style>
+  body { font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; margin: 2rem auto; max-width: 960px; color: #1a1a1a; }
+  h1 { margin-bottom: 0; } .sub { color: #666; margin-top: .2rem; }
+  table { border-collapse: collapse; width: 100%; margin: 1rem 0; font-size: .9rem; }
+  th, td { border: 1px solid #ddd; padding: .35rem .6rem; text-align: left; }
+  th { background: #f5f5f5; }
+  td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  tr.hot td { background: #fff3cd; font-weight: 600; }
+  .quote { border-left: 3px solid #999; padding-left: .8rem; margin: .5rem 0; }
+  .speaker { color: #666; font-size: .85rem; }
+  .flag-high { color: #b30000; font-weight: 700; }
+  .flag-med { color: #b36b00; font-weight: 600; }
+  .flag-low { color: #555; }
+  .caveat { background: #e8f0fe; border: 1px solid #b3c7f7; padding: .7rem 1rem; border-radius: 6px; margin: 1rem 0; }
+  .read { background: #f6f6f6; padding: 1rem; border-radius: 6px; font-size: 1.05rem; }
+  .spark { font-family: monospace; white-space: nowrap; }
+</style>
+
+<h1>{{ company.name }} ({{ company.ticker }})</h1>
+<p class="sub">{{ transcript.fiscal_label or "" }} &middot; call date {{ transcript.call_date }} &middot; source: {{ transcript.source }} &middot; doc kind: {{ transcript.doc_kind }}</p>
+
+{% if transcript.doc_kind == "summary" %}
+<div class="caveat"><strong>Summary-mode caveat:</strong> this document is an IR-edited
+summary, not a verbatim transcript. Dropped content is weak evidence (may be editing);
+added content is strong evidence (deliberate inclusion).</div>
+{% endif %}
+
+{% if synthesis and synthesis.one_paragraph_read %}
+<h2>The read</h2>
+<div class="read">{{ synthesis.one_paragraph_read }}</div>
+{% endif %}
+
+{% if synthesis and synthesis.flags %}
+<h2>Flags</h2>
+<ul>
+{% for f in synthesis.flags %}
+  <li class="flag-{{ f.severity }}">[{{ f.severity | upper }}] {{ f.note }}</li>
+{% endfor %}
+</ul>
+{% endif %}
+
+<h2>Metrics</h2>
+<table>
+  <tr><th>Section</th><th>Metric</th><th>Value</th><th>QoQ &Delta;</th><th>z-score</th></tr>
+  {% for m in metric_rows %}
+  <tr{% if m.zscore is not none and m.zscore | abs >= 1.5 %} class="hot"{% endif %}>
+    <td>{{ m.section }}</td><td>{{ m.name }}</td>
+    <td class="num">{{ "%.3f" | format(m.value) if m.value is not none else "—" }}</td>
+    <td class="num">{{ "%+.3f" | format(m.delta) if m.delta is not none else "—" }}</td>
+    <td class="num">{{ "%+.2f" | format(m.zscore) if m.zscore is not none else "—" }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+{% if theme_history %}
+<h2>Theme densities (per 10k words, last 8Q, oldest &rarr; newest)</h2>
+<table>
+  <tr><th>Theme</th><th>History</th><th>Latest</th></tr>
+  {% for row in theme_history %}
+  <tr>
+    <td>{{ row.theme }}</td>
+    <td class="spark">{{ row.vals | join(" · ") }}</td>
+    <td class="num">{{ row.latest }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endif %}
+
+{% macro quote_section(title, items) %}
+{% if items %}
+<h2>{{ title }}</h2>
+{% for item in items %}
+<div class="quote">
+  <strong>{{ item.topic }}</strong><br>
+  &ldquo;{{ item.evidence_quote }}&rdquo;
+  <span class="speaker">— {{ item.speaker }}</span>
+</div>
+{% endfor %}
+{% endif %}
+{% endmacro %}
+
+{% if synthesis %}
+{{ quote_section("New topics", synthesis.new_topics) }}
+{{ quote_section("Dropped topics", synthesis.dropped_topics) }}
+{{ quote_section("Softened", synthesis.softened) }}
+{{ quote_section("Hardened", synthesis.hardened) }}
+{% if synthesis.analyst_focus_shift %}
+<h2>Analyst focus shift</h2>
+<p>{{ synthesis.analyst_focus_shift }}</p>
+{% endif %}
+{% else %}
+<p><em>LLM synthesis unavailable for this report (no API key or synthesis skipped);
+metrics and diff counts above are computed deterministically.</em></p>
+{% endif %}
+
+<h2>Diff summary</h2>
+<p>{{ diff_counts.new }} new sentences, {{ diff_counts.dropped }} dropped sentences vs prior call
+(threshold {{ threshold }}).</p>

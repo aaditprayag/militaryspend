@@ -1,0 +1,32 @@
+<meta charset="utf-8">
+<title>Transcript Delta Engine — Coverage Dashboard</title>
+<style>
+  body { font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; margin: 2rem auto; max-width: 1100px; color: #1a1a1a; }
+  table { border-collapse: collapse; width: 100%; font-size: .9rem; }
+  th, td { border: 1px solid #ddd; padding: .4rem .6rem; }
+  th { background: #f5f5f5; }
+  td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  a { color: #0645ad; text-decoration: none; }
+</style>
+<h1>Transcript Delta Engine</h1>
+<p>Key z-scores, latest call per name. Red = language change / caution signal, green = stability.
+Cells shade by |z|.</p>
+<table>
+  <tr>
+    <th>Name</th><th>Latest call</th>
+    {% for col in columns %}<th>{{ col }}</th>{% endfor %}
+  </tr>
+  {% for row in rows %}
+  <tr>
+    <td><a href="{{ row.href }}">{{ row.ticker }}</a> {{ row.name }}</td>
+    <td>{{ row.fiscal_label or row.call_date }}</td>
+    {% for cell in row.cells %}
+    <td class="num" style="background: {{ cell.color }}">
+      {{ "%+.2f" | format(cell.z) if cell.z is not none else "—" }}
+    </td>
+    {% endfor %}
+  </tr>
+  {% endfor %}
+</table>
+<p style="color:#666;font-size:.8rem">Generated {{ generated_at }}. Z-scores are within-company,
+vs trailing {{ window }}-quarter history.</p>

@@ -1,0 +1,21 @@
+{
+  "event": {"source_event_id": "evt_q1", "call_date": "2025-01-29", "fiscal_label": "Q1 FY2025"},
+  "components": [
+    {"person_name": "Operator", "component_type": "Presentation Operator Message",
+     "text": "Ladies and gentlemen, welcome to the first quarter earnings call. Please stand by."},
+    {"person_name": "Pat Chief", "component_type": "Presenter Speech",
+     "text": "Thank you and good afternoon everyone. Revenue was 10.2 billion dollars, up 12% year over year. Demand for our AI server accelerator products remains strong across every hyperscaler customer. We will continue to invest in data center capacity through fiscal 2025."},
+    {"person_name": "Fran Finance", "component_type": "Presenter Speech",
+     "text": "Gross margin was 56.5%, an increase of 90 bps sequentially. Channel inventory remained lean at 71 days across our distribution partners. We are guiding next quarter revenue to 10.6 billion dollars at the midpoint."},
+    {"person_name": "Operator", "component_type": "Question and Answer Operator Message",
+     "text": "We will now begin the question and answer session. Our first question comes from Alex Analyst of Big Bank."},
+    {"person_name": "Alex Analyst", "component_type": "Question",
+     "text": "Thanks for taking my question about the data center business. Can you quantify the AI server backlog exiting the quarter and how visibility compares to ninety days ago?"},
+    {"person_name": "Pat Chief", "component_type": "Answer",
+     "text": "Backlog grew again this quarter and visibility now extends beyond four quarters. We will add capacity in a disciplined way to meet that demand."},
+    {"person_name": "Bella Broker", "component_type": "Question",
+     "text": "A question on inventory in the handset channel please. Are you seeing any destocking risk into the June quarter given macro softness in China?"},
+    {"person_name": "Fran Finance", "component_type": "Answer",
+     "text": "Channel inventory is at the low end of our target range today. We could see modest restocking in the second half if sell-through holds."}
+  ]
+}
